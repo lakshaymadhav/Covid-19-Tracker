@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 
 class IndiaPanel extends StatelessWidget {
-
   final Map IndiaData;
 
   const IndiaPanel({Key key, this.IndiaData}) : super(key: key);
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -16,53 +12,47 @@ class IndiaPanel extends StatelessWidget {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 2
+            crossAxisCount: 2, childAspectRatio: 2),
+        children: <Widget>[
+          StatusPanel(
+            title: "CONFIRMED",
+            PanelColor: Colors.red[100],
+            TextColor: Colors.red,
+            counter: IndiaData['total'].toString(),
           ),
-          children: <Widget>[
-            StatusPanel(
-              title: "CONFIRMED",
-              PanelColor: Colors.red[100],
-              TextColor: Colors.red,
-              counter: IndiaData['total'].toString(),
-            ),
-            StatusPanel(
-               title: "ACTIVE",
-              PanelColor: Colors.blue[100],
-              TextColor: Colors.blue[900],
-              counter: IndiaData[''].toString(),
-            ),
-            StatusPanel(
-               title: "RECOVERED",
-              PanelColor: Colors.green[100],
-              TextColor: Colors.green,
-              counter: IndiaData['Cured/Discharged/Migrated'].toString(),
-            ),
-            StatusPanel(
-               title: "DEATHS",
-              PanelColor: Colors.grey[400],
-              TextColor: Colors.grey[900],
-              counter: IndiaData['Death'].toString(),
-            ),
-          ],
+          StatusPanel(
+            title: "ACTIVE",
+            PanelColor: Colors.blue[100],
+            TextColor: Colors.blue[900],
+            counter: IndiaData[''].toString(),
+          ),
+          StatusPanel(
+            title: "RECOVERED",
+            PanelColor: Colors.green[100],
+            TextColor: Colors.green,
+            counter: IndiaData['Cured/Discharged/Migrated'].toString(),
+          ),
+          StatusPanel(
+            title: "DEATHS",
+            PanelColor: Colors.grey[400],
+            TextColor: Colors.grey[900],
+            counter: IndiaData['Death'].toString(),
+          ),
+        ],
       ),
     );
   }
 }
 
 class StatusPanel extends StatelessWidget {
-
-
   final Color PanelColor;
   final Color TextColor;
   final String title;
   final String counter;
 
-  const StatusPanel({Key key, this.PanelColor, this.TextColor, this.title, this.counter}) : super(key: key);
-
-
-
-
+  const StatusPanel(
+      {Key key, this.PanelColor, this.TextColor, this.title, this.counter})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,13 +61,21 @@ class StatusPanel extends StatelessWidget {
       margin: EdgeInsets.all(10),
       color: PanelColor,
       height: 80,
-      width: width/2,
+      width: width / 2,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(title,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: TextColor),),
-          Text(counter,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: TextColor),),     
-             ],
+          Text(
+            title,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 16, color: TextColor),
+          ),
+          Text(
+            counter,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 16, color: TextColor),
+          ),
+        ],
       ),
     );
   }

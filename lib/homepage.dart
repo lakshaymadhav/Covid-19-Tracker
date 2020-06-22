@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:Covid19_Tracker/widgets/Indiapanel.dart';
 import 'package:flutter/material.dart';
 import 'datasoruce.dart';
@@ -11,25 +10,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   Map IndiaData;
-  fetchIndiaData()async{
-    http.Response response=await http.get('https://api.rootnet.in/covid19-in/stats/latest');
+  fetchIndiaData() async {
+    http.Response response =
+        await http.get('https://api.rootnet.in/covid19-in/stats/latest');
     setState(() {
-      IndiaData=json.decode(response.body);
+      IndiaData = json.decode(response.body);
     });
   }
 
-@override
+  @override
   void initState() {
     // TODO: implement initState
     fetchIndiaData();
     super.initState();
-
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,31 +34,39 @@ class _HomePageState extends State<HomePage> {
         title: Text('COIVD-19 TRACKER APP'),
       ),
       body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
               height: 75,
-              
               alignment: Alignment.center,
-              padding:EdgeInsets.all(10) ,
+              padding: EdgeInsets.all(10),
               color: Colors.orange[100],
               child: Text(
                 DataSource.quote,
-                style: TextStyle(color: Colors.orange[800],
-                fontWeight: FontWeight.bold,
-                fontSize: 16 ,
+                style: TextStyle(
+                  color: Colors.orange[800],
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical:10.0,horizontal: 10.0),
-              child: Text("INDIA",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+              child: Text(
+                "INDIA",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
             ),
-            IndiaData==null?CircularProgressIndicator():IndiaPanel(IndiaData: IndiaData,), 
+            IndiaData == null
+                ? CircularProgressIndicator()
+                : IndiaPanel(
+                    IndiaData: IndiaData,
+                  ),
           ],
         ),
-      ) ,
+      ),
     );
   }
 }
