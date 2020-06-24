@@ -51,7 +51,7 @@ class StatusPanel extends StatelessWidget {
   final String counter;
 
   const StatusPanel(
-      {Key key, this.PanelColor, this.TextColor, this.title, this.counter})
+      {Key key, this.PanelColor, this.TextColor, this.title, this.counter,})
       : super(key: key);
 
   @override

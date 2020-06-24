@@ -4,6 +4,17 @@ import 'package:flutter/material.dart';
 
 class Search extends SearchDelegate{
 
+ @override
+ ThemeData appBarTheme(BuildContext context) {
+   final ThemeData theme = Theme.of(context);
+   return theme.copyWith(
+     primaryColor: theme.primaryColor,
+     primaryIconTheme: theme.primaryIconTheme,
+     primaryColorBrightness: theme.primaryColorBrightness,
+     primaryTextTheme: theme.primaryTextTheme,
+   );
+ }
+
   final List StateList;
 
   Search(this.StateList);
@@ -55,7 +66,7 @@ class Search extends SearchDelegate{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Icon(Icons.location_city,size: 90,),
-                    Text(SuggestionList[index]['state'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                    Text(SuggestionList[index]['state'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),),
                   ],
                 ),
               ),
