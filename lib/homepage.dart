@@ -3,6 +3,7 @@ import 'package:Covid19_Tracker/pages/statepage.dart';
 import 'package:Covid19_Tracker/panels/Indiapanel.dart';
 import 'package:Covid19_Tracker/panels/infopanel.dart';
 import 'package:Covid19_Tracker/panels/mostaffectedstates.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'datasoruce.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   List StateData;
   fetchStateData() async {
     http.Response response =
-        await http.get('https://api.covidindiatracker.com/state_data.json');
+        await http.get('https://api.covidindiatracker.com/state_data.json?sort=confirmed');
     setState(() {
       StateData = json.decode(response.body);
     });
@@ -44,6 +45,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Theme.of(context).brightness==Brightness.light?Icons.lightbulb_outline:Icons.highlight),
+             onPressed: (){
+               DynamicTheme.of(context).setBrightness(Theme.of(context).brightness==Brightness.light?Brightness.dark:Brightness.light);
+             }),
+        ],
+
         centerTitle: false,
         title: Text('COIVD-19 TRACKER APP'),
       ),
@@ -95,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                     IndiaData: IndiaData,
                   ),
             
-             Padding(
+             Padding( 
                padding: const EdgeInsets.symmetric(horizontal:10.0),
                child: Text("Most Affected States",style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
              ),

@@ -16,14 +16,15 @@ final List StateData;
         return Container(
           margin: EdgeInsets.symmetric(vertical:5 ,horizontal: 10),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Icon(Icons.room),
               SizedBox(width:10,),
-              Text(StateData[index]['state'],style: TextStyle(fontWeight: FontWeight.bold),),
+              Text(StateData[index]['state'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
               SizedBox(width:10,),
-              Text("=>",style: TextStyle(fontWeight: FontWeight.bold),),
+              Icon(Icons.forward,size: 15,),
               SizedBox(width:10,),
-              Text('Confirmed: ' + StateData[index]['confirmed'].toString(),style: TextStyle(color:Colors.red,fontWeight: FontWeight.bold), ),
+              Text('Confirmed: ' + StateData[index]['confirmed'].toString(),style: TextStyle(color:Colors.red,fontWeight: FontWeight.bold,fontSize: 16), ),
             ],
           ),
         );

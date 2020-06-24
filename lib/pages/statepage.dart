@@ -1,3 +1,4 @@
+import 'package:Covid19_Tracker/pages/search.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http; 
 import 'dart:convert';
@@ -28,6 +29,16 @@ List StateData;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search), 
+            onPressed: (){
+              showSearch(context: context, delegate: Search(StateData));
+            },
+            ),
+        ],
+
+ 
         title: Text("State Stats"),
       ),
       body: StateData == null? Center(child: CircularProgressIndicator()): ListView.builder(
@@ -36,20 +47,16 @@ List StateData;
         return Container(
           height: 130,
           margin: EdgeInsets.symmetric(horizontal:10,vertical: 10 ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(color: Colors.grey[100],blurRadius: 10,offset: Offset(0,10,)),
-            ],
-          ),
           child: Row(
             children: <Widget>[
               Container(
+                width: 180,
                 margin: EdgeInsets.symmetric(horizontal: 10,),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(Icons.location_city,size: 80,),
+                    Icon(Icons.location_city,size: 90,),
                     Text(StateData[index]['state'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
                   ],
                 ),
@@ -66,7 +73,6 @@ List StateData;
                     ],
                   ),
                 ),
-
               ),
             ],
           ),
