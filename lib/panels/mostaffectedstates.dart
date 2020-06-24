@@ -11,9 +11,10 @@ final List StateData;
     return Container(
       child:ListView.builder(
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context,index ){
         return Container(
-          margin: EdgeInsets.symmetric(vertical:5 ),
+          margin: EdgeInsets.symmetric(vertical:5 ,horizontal: 10),
           child: Row(
             children: <Widget>[
               Icon(Icons.room),
