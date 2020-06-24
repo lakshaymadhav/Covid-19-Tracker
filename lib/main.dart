@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:Covid19_Tracker/datasoruce.dart';
 import 'package:Covid19_Tracker/homepage.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: theme,
-            home: HomePage(),
+            home: SplashScreen(),
           );
         },
 
@@ -35,3 +37,45 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+  class SplashScreen extends StatefulWidget {
+    @override
+    _SplashScreenState createState() => _SplashScreenState();
+  }
+  
+  class _SplashScreenState extends State<SplashScreen> {
+    
+
+    @override
+    void initState() {
+    // TODO: implement initState
+    Timer(Duration(seconds: 3), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    });
+  }
+      @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image(
+                  image: AssetImage("assets/covidnobg.png")
+                  ),
+                Text("COVID-19 TRACKER",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+                
+              ],
+            ),
+        ),
+      ),
+    );
+  }
+}
+  
