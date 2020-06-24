@@ -75,10 +75,14 @@ class Search extends SearchDelegate{
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text('CONFRIMED: '+SuggestionList[index]['confirmed'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
+                       Text('CONFRIMED: '+SuggestionList[index]['confirmed'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
+                      Text('['+SuggestionList[index]['cChanges'].toString()+"]",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
                       Text('ACTIVE: '+SuggestionList[index]['active'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
+                      Text('['+SuggestionList[index]['aChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
                       Text('RECOVERED: '+SuggestionList[index]['recovered'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
+                      Text('['+SuggestionList[index]['rChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
                       Text('DEATHS: '+SuggestionList[index]['deaths'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
+                      Text('['+SuggestionList[index]['dChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
                     ],
                   ),
                 ),

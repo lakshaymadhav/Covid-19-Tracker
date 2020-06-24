@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
 
           actions: <Widget>[
             IconButton(
-              icon: Icon(Theme.of(context).brightness==Brightness.light?Icons.lightbulb_outline:Icons.highlight),
+              icon: Icon(Theme.of(context).brightness==Brightness.light?Icons.brightness_high:Icons.brightness_low),
                onPressed: (){
                  DynamicTheme.of(context).setBrightness(Theme.of(context).brightness==Brightness.light?Brightness.dark:Brightness.light);
                }),
