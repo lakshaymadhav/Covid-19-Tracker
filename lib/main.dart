@@ -6,11 +6,12 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyApp( ));
 }
 
 
 class MyApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: theme,
             home: SplashScreen(),
+            routes: <String, WidgetBuilder>{
+              '/homepage': (BuildContext context) => new HomePage()
+            },
           );
         },
 
@@ -45,18 +49,19 @@ class MyApp extends StatelessWidget {
   
   class _SplashScreenState extends State<SplashScreen> {
     
+startTime() async {
+    var _duration = new Duration(seconds: 2);
+    return new Timer(_duration, navigationPage);
+  }
 
-    @override
-    void initState() {
-    // TODO: implement initState
-    Timer(Duration(seconds: 3), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
-    });
+  void navigationPage() {
+    Navigator.of(context).pushReplacementNamed('/homepage');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTime();
   }
       @override
   Widget build(BuildContext context) {
