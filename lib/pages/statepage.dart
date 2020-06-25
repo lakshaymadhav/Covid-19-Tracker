@@ -45,7 +45,7 @@ List StateData;
       itemCount: StateData==null?0:StateData.length,
       itemBuilder: (context, index) {
         return Container(
-          height: 130,
+          height: 140,
           margin: EdgeInsets.symmetric(horizontal:10,vertical: 10 ),
           child: Row(
             children: <Widget>[
@@ -56,7 +56,7 @@ List StateData;
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(Icons.location_city,size: 90,),
+                    Icon(Icons.location_city,size: 100,),
                     Text(StateData[index]['state'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
                   ],
                 ),

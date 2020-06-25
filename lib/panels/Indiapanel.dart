@@ -14,13 +14,15 @@ class IndiaPanel extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, childAspectRatio: 2),
         children: <Widget>[
-          StatusPanel(
-            title: "CONFIRMED",
-            PanelColor: Colors.red[100],
-            TextColor: Colors.red,
-            counter: IndiaData['confirmed'].toString(),
-            newly: IndiaData['cChanges'].toString(),
-          ),
+          
+           StatusPanel(
+             title: "CONFIRMED",
+             PanelColor: Colors.red[100],
+             TextColor: Colors.red,
+             counter: IndiaData['confirmed'].toString(),
+             newly: IndiaData['cChanges'].toString(),
+             ),
+          
           StatusPanel(
             title: "ACTIVE",
             PanelColor: Colors.blue[100],
@@ -62,31 +64,30 @@ class StatusPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return Container(
-      margin: EdgeInsets.all(10),
-      color: PanelColor,
-      height: 80,
-      width: width / 2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 16, color: TextColor),
-          ),
-          Text(
-            counter,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 16, color: TextColor),
-          ),
-           Text(
-            "[+"+newly+"]",
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 14, color: TextColor),
-          ),
-        ],
-      ),
-    );
+    return Card(
+    margin: EdgeInsets.all(10),
+    color: PanelColor,
+    
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+    title,
+    style: TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 16, color: TextColor),
+        ),
+        Text(
+    counter,
+    style: TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 16, color: TextColor),
+        ),
+         Text(
+    "[+"+newly+"]",
+    style: TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 14, color: TextColor),
+        ),
+      ],
+    ),
+        );
   }
 }
