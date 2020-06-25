@@ -5,6 +5,8 @@ import 'package:Covid19_Tracker/panels/infopanel.dart';
 import 'package:Covid19_Tracker/panels/mostaffectedstates.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'datasoruce.dart';
 import 'package:http/http.dart' as http;
 
@@ -55,7 +57,7 @@ class _HomePageState extends State<HomePage> {
 
           actions: <Widget>[
             IconButton(
-              icon: Icon(Theme.of(context).brightness==Brightness.light?Icons.brightness_high:Icons.brightness_low),
+              icon: Icon(Theme.of(context).brightness==Brightness.light?Icons.wb_sunny:FontAwesomeIcons.cloudMoon),
                onPressed: (){
                  DynamicTheme.of(context).setBrightness(Theme.of(context).brightness==Brightness.light?Brightness.dark:Brightness.light);
                }),
@@ -123,6 +125,32 @@ class _HomePageState extends State<HomePage> {
                InfoPanel(),
                SizedBox(height: 20,),
                Center(child: Text('STAY HOME, STAY SAFE',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
+               SizedBox(height: 20,),
+               Center(child: Text("REACH ME ON:",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,))),
+               SizedBox(height: 10,),
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: <Widget>[
+                   IconButton(
+                     icon: FaIcon(FontAwesomeIcons.instagram), 
+                     onPressed: (){
+                       launch("https://www.instagram.com/_lakshay.apk_/");
+                     }
+                     ),
+                   IconButton(
+                     icon: FaIcon(FontAwesomeIcons.github), 
+                     onPressed: (){
+                       launch("https://github.com/lakshaymadhav");
+                     }
+                     ),
+                   IconButton(
+                     icon: Icon(Icons.mail), 
+                     onPressed: (){
+                       launch("mailto: lakshaymadhav25@gmail.com");
+                     }
+                     ), 
+                 ],
+               ),
                SizedBox(height: 50,),
             ],
           ),
