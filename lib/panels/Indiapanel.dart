@@ -65,6 +65,9 @@ class StatusPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+     ),
     margin: EdgeInsets.all(10),
     color: PanelColor,
     
