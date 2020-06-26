@@ -45,8 +45,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<Null> refreshList() async{
     await http.get('https://api.covidindiatracker.com/total.json');
-    await http.get('https://api.covidindiatracker.com/state_data.json');
-    await http.get('https://api.covid19india.org/v3/data.json');
+    await http.get('https://api.covidindiatracker.com/state_data.json'); 
   }
 
   @override
@@ -55,7 +54,6 @@ class _HomePageState extends State<HomePage> {
       onRefresh: refreshList,
           child: Scaffold(
         appBar: AppBar(
-
           actions: <Widget>[
             IconButton(
               icon: Icon(Theme.of(context).brightness==Brightness.light?Icons.wb_sunny:FontAwesomeIcons.cloudMoon),

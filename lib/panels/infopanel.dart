@@ -1,5 +1,6 @@
 import 'package:Covid19_Tracker/datasoruce.dart';
 import 'package:Covid19_Tracker/pages/faqs.dart';
+import 'package:Covid19_Tracker/pages/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -67,7 +68,7 @@ class InfoPanel extends StatelessWidget {
              
             GestureDetector(
               onTap: (){
-                launch('');
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Payment()));
               },
               child: Container(
               padding:EdgeInsets.symmetric(vertical: 10,horizontal: 20),
