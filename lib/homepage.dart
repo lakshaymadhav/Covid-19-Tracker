@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
   Future<Null> refreshList() async{
     await http.get('https://api.covidindiatracker.com/total.json');
     await http.get('https://api.covidindiatracker.com/state_data.json');
+    await http.get('https://api.covid19india.org/v3/data.json');
   }
 
   @override
@@ -62,7 +63,6 @@ class _HomePageState extends State<HomePage> {
                  DynamicTheme.of(context).setBrightness(Theme.of(context).brightness==Brightness.light?Brightness.dark:Brightness.light);
                }),
           ],
-
           centerTitle: false,
           title: Text('COIVD-19 TRACKER APP'),
         ),
@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                      ), 
                  ],
                ),
-               SizedBox(height: 50,),
+               SizedBox(height: 30,),
             ],
           ),
         ),
