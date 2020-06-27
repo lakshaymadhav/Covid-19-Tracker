@@ -34,8 +34,7 @@ dependencies:
   http: ^0.12.1
   dynamic_theme: ^1.0.0
   font_awesome_flutter: ^8.8.1
-  razorpay_flutter: ^1.1.4
-  fluttertoast: ^4.0.0
+  flutter_upi: ^0.0.2
   
 
 dev_dependencies:

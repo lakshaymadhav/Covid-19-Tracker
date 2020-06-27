@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_upi/flutter_upi.dart';
 
+import 'dart:async';
 
 class Payment extends StatefulWidget {
   @override
@@ -11,57 +10,32 @@ class Payment extends StatefulWidget {
 
 class _PaymentState extends State<Payment> {
 
-  int totalamount=0;
-  Razorpay _razorpay;
 
-  @override
+ Future _initiateTransaction;
+ GlobalKey<ScaffoldState> _key;
+
+ @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _razorpay=Razorpay();
-    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-      _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    _key=GlobalKey<ScaffoldState>();
   }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _razorpay.clear();
+ 
+  Future<String> initiateTransaction(String app) async{
+    String response = await FlutterUpi.initiateTransaction(
+      app: app, 
+      pa: "lakshaymadhav25@okicici", 
+      pn: "LAKSHAY MADHAV", 
+      tr: "UniqueTransactionId", 
+      tn: "Developer Donation", 
+      am: "0", 
+      cu: "INR", 
+      url: "www.google.com",
+      );
+      print(response);
+      return response;
   }
-
-  void openCheckout(){
-    var options={
-      'key':'rzp_test_gZtHIyFl71vYuz',
-      'amount':totalamount*100,
-      'name':'LAKSHAY MADHAV',
-      'description':'Developer Donation',
-      'prefill':{'contact':'','email':''},
-      'external':{
-        'wallets':['patym'],
-      }
-    };
-    try{
-      _razorpay.open(options);
-    }
-    catch(e)
-    {
-      debugPrint(e);
-    }
-  }
-
-  void _handlePaymentSuccess(PaymentSuccessResponse response){
-    Fluttertoast.showToast(msg: 'SUCCESS '+response.paymentId);
-  }
-
-  void _handlePaymentError(PaymentFailureResponse response){
-    Fluttertoast.showToast(msg: 'SUCCESS '+response.code.toString()+' - '+response.message);
-  }
-
-  void _handleExternalWallet(ExternalWalletResponse response){
-      Fluttertoast.showToast(msg: 'EXTERNAL_WALLET '+response.walletName);
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -71,47 +45,170 @@ class _PaymentState extends State<Payment> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-             
-             Container(
-                  width: 200,
-                  child: TextField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'ENTER AMOUNT',
-                    hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  onChanged: (value){
-                    totalamount=num.parse(value);
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: FutureBuilder(
+                  future: _initiateTransaction,
+                  builder: (BuildContext ctx, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting ||
+                        snapshot.data == null) {
+                      return Text("Processing or Yet to start...");
+                    } else {
+                      switch (snapshot.data.toString()) {
+                        case 'app_not_installed':
+                          return Text("Application not installed.");
+                          break;
+                        case 'invalid_params':
+                          return Text("Request parameters are wrong");
+                          break;
+                        case 'user_canceled':
+                          return Text("User canceled the flow");
+                          break;
+                        case 'null_response':
+                          return Text("No data received");
+                          break;
+                        default:
+                          {
+                            FlutterUpiResponse flutterUpiResponse =
+                                FlutterUpiResponse(snapshot.data);
+                            print(flutterUpiResponse.txnId);
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Expanded(
+                                        flex: 2, child: Text("Transaction ID")),
+                                    Expanded(
+                                        flex: 3,
+                                        child: Text(flutterUpiResponse.txnId)),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Expanded(
+                                        flex: 2,
+                                        child: Text("Transaction Reference")),
+                                    Expanded(
+                                        flex: 3,
+                                        child: Text(flutterUpiResponse.txnRef)),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Expanded(
+                                        flex: 2,
+                                        child: Text("Transaction Status")),
+                                    Expanded(
+                                        flex: 3,
+                                        child: Text(flutterUpiResponse.Status)),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text("Approval Reference Number"),
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Text(
+                                          flutterUpiResponse.ApprovalRefNo ??""),
+                                    ),   
+                                  ],  
+                                ),
+                                
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text("Response Code"),
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child:
+                                          Text(flutterUpiResponse.responseCode),
+                                    ),
+                                  ],
+                                ),
+                              SizedBox(height: 20),
+                              Text("Thank You,Your Kind Gesture is highly appreciated!!!",
+                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+                                ),
+                              ],
+                            );
+                          }
+                      }
+                    }
                   },
                 ),
-             ),
-             SizedBox(
-               height: 15,
-             ),
-             RaisedButton(
-               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-               color: Colors.blue[300],
-               child: Text('PAY',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20 ),),
-               onPressed: (){
-                 openCheckout();
-               },
-               ),
-
-               SizedBox(
-               height: 35,
-             ),
-
-                Text("Your kind Gesture is highly appreciated!!",
-              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
               ),
-            
-          ],
+            ],
+          ),
         ),
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.blue,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              FlatButton(
+                color: Colors.blue,
+                child: Text(
+                  "Pay Now with BHIM UPI",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  _initiateTransaction =initiateTransaction(FlutterUpiApps.BHIMUPI);
+                  setState(() {});
+                },
+              ),
+              Divider(
+                height: 1.0,
+                color: Colors.white,
+              ),
+              FlatButton(
+                color: Colors.blue,
+                child: Text(
+                  "Pay Now with Google Pay",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  _initiateTransaction =
+                      initiateTransaction(FlutterUpiApps.GooglePay);
+                  setState(() {});
+                },
+              ),
+              Divider(
+                height: 1.0,
+                color: Colors.white,
+              ),
+              FlatButton(
+                color: Colors.blue,
+                child: Text(
+                  "Pay Now with PhonePe",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  _initiateTransaction =
+                      initiateTransaction(FlutterUpiApps.PhonePe);
+                  setState(() {});
+                },
+              ),
+              
+            ],
+          ),
       ),
     );
   }
