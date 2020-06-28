@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:Covid19_Tracker/pages/districtpage.dart';
 import 'package:Covid19_Tracker/pages/statepage.dart';
 import 'package:Covid19_Tracker/panels/Indiapanel.dart';
 import 'package:Covid19_Tracker/panels/infopanel.dart';
@@ -46,6 +47,7 @@ class _HomePageState extends State<HomePage> {
   Future<Null> refreshList() async{
     await http.get('https://api.covidindiatracker.com/total.json');
     await http.get('https://api.covidindiatracker.com/state_data.json'); 
+    await http.get('https://api.covid19india.org/v2/state_district_wise.json');
   }
 
   @override
@@ -100,10 +102,26 @@ class _HomePageState extends State<HomePage> {
                           color: primaryBlack,
                           borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Text("Regional",style: TextStyle(fontSize: 16,color: Colors.white, fontWeight: FontWeight.bold),)
+                      child: Text("State",style: TextStyle(fontSize: 16,color: Colors.white, fontWeight: FontWeight.bold),)
                       
                       ),
                   ),
+
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>DistrictPage()));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: primaryBlack,
+                          borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Text("District",style: TextStyle(fontSize: 16,color: Colors.white, fontWeight: FontWeight.bold),)
+                      
+                      ),
+                  ),
+                  
                   
                     ],
                   ),
