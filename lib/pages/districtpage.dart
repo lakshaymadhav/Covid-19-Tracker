@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:Covid19_Tracker/pages/searchstate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'DistrictData.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _DistrictPageState extends State<DistrictPage> {
           IconButton(
             icon: Icon(Icons.search), 
             onPressed: (){
-              
+              showSearch(context: context, delegate: SearchState(_DistrictData));
             },
          ),
         ],
@@ -51,7 +52,7 @@ class _DistrictPageState extends State<DistrictPage> {
         itemCount: null==_DistrictData?0:_DistrictData.length,
         itemBuilder: (context, index) {
           DistrictData data=_DistrictData[index];
-         return ListTile(
+           return ListTile(
               title: Text(data.state),
               subtitle: Text(data.statecode),
           );
