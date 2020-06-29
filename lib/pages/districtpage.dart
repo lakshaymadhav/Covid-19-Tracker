@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:Covid19_Tracker/pages/searchstate.dart';
+import 'package:Covid19_Tracker/pages/DistrictSubPage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'DistrictData.dart';
 import 'package:flutter/material.dart';
@@ -37,14 +37,7 @@ class _DistrictPageState extends State<DistrictPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search), 
-            onPressed: (){
-              showSearch(context: context, delegate: SearchState(_DistrictData));
-            },
-         ),
-        ],
+        
        title: Text("District Stats"),
       ),
       body: _loading?Center(child: CircularProgressIndicator(),):
@@ -53,8 +46,11 @@ class _DistrictPageState extends State<DistrictPage> {
         itemBuilder: (context, index) {
           DistrictData data=_DistrictData[index];
            return ListTile(
-              title: Text(data.state),
-              subtitle: Text(data.statecode),
+             onTap: (){
+               Navigator.push(context, MaterialPageRoute(builder: (context)=>DistrictSubPage(districtData: data.districtData,)));
+             },
+            title: Text(data.state,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+              subtitle: Text(data.statecode,style: TextStyle(fontSize: 14),),
           );
         },
         ),

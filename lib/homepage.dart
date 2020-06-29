@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'datasoruce.dart';
 import 'package:http/http.dart' as http;
 
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,6 +19,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Map IndiaData;
+  
+  
   fetchIndiaData() async {
     http.Response response =
         await http.get('https://api.covidindiatracker.com/total.json');
@@ -52,9 +55,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+  
     return RefreshIndicator(
       onRefresh: refreshList,
           child: Scaffold(
+            
         appBar: AppBar(
           actions: <Widget>[
             IconButton(
@@ -142,6 +147,8 @@ class _HomePageState extends State<HomePage> {
                SizedBox(height: 20,),
                Center(child: Text('STAY HOME, STAY SAFE',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
                SizedBox(height: 20,),
+                Center(child:Text("Developed by Lakshay Madhav & Bharath with ❤️",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,))),
+               SizedBox(height: 10,),
                Center(child: Text("REACH ME ON:",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,))),
                SizedBox(height: 10,),
                Row(

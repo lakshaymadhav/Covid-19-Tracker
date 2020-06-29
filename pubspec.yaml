@@ -35,6 +35,7 @@ dependencies:
   dynamic_theme: ^1.0.0
   font_awesome_flutter: ^8.8.1
   flutter_upi: ^0.0.2
+  flutter_emoji: ">= 2.0.0"
   
 
 dev_dependencies:
