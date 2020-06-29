@@ -147,8 +147,7 @@ class _HomePageState extends State<HomePage> {
                SizedBox(height: 20,),
                Center(child: Text('STAY HOME, STAY SAFE',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
                SizedBox(height: 20,),
-                Center(child:Text("Developed by Lakshay Madhav & Bharath with ❤️",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,))),
-               SizedBox(height: 10,),
+                
                Center(child: Text("REACH ME ON:",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,))),
                SizedBox(height: 10,),
                Row(
@@ -174,6 +173,9 @@ class _HomePageState extends State<HomePage> {
                      ), 
                  ],
                ),
+               SizedBox(height: 20,),
+               Center(child:Text("Developed by Lakshay Madhav & Bharath with ❤️",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,))),
+              
                SizedBox(height: 30,),
             ],
           ),
