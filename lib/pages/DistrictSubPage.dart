@@ -23,7 +23,10 @@ class DistrictSubPage extends StatelessWidget {
             _currentData = districtData[index];
             return Card(
               elevation: 2.0,
+<<<<<<< HEAD
               
+=======
+>>>>>>> 71ded4ae4556d8c4b467d3554e86cc65f7cfde4c
               child: ExpansionTile(
                 title: Center(
                     child: Text(
