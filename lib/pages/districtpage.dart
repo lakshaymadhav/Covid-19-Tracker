@@ -51,7 +51,7 @@ class _DistrictPageState extends State<DistrictPage> {
         itemCount: null==_DistrictData?0:_DistrictData.length,
         itemBuilder: (context, index) {
           DistrictData data=_DistrictData[index];
-          ListTile(
+         return ListTile(
               title: Text(data.state),
               subtitle: Text(data.statecode),
           );
