@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-
   List StateData;
   fetchStateData() async {
     http.Response response =
@@ -35,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       StateData = json.decode(response.body);
     });
   }
- 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -44,9 +43,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  Future<Null> refreshList() async{
+  Future<Null> refreshList() async {
     await http.get('https://api.covidindiatracker.com/total.json');
-    await http.get('https://api.covidindiatracker.com/state_data.json'); 
+    await http.get('https://api.covidindiatracker.com/state_data.json');
     await http.get('https://api.covid19india.org/v2/state_district_wise.json');
   }
 
@@ -54,14 +53,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: refreshList,
-          child: Scaffold(
+      child: Scaffold(
         appBar: AppBar(
           actions: <Widget>[
             IconButton(
-              icon: Icon(Theme.of(context).brightness==Brightness.light?Icons.wb_sunny:FontAwesomeIcons.cloudMoon),
-               onPressed: (){
-                 DynamicTheme.of(context).setBrightness(Theme.of(context).brightness==Brightness.light?Brightness.dark:Brightness.light);
-               }),
+                icon: Icon(Theme.of(context).brightness == Brightness.light
+                    ? Icons.wb_sunny
+                    : FontAwesomeIcons.cloudMoon),
+                onPressed: () {
+                  DynamicTheme.of(context).setBrightness(
+                      Theme.of(context).brightness == Brightness.light
+                          ? Brightness.dark
+                          : Brightness.light);
+                }),
           ],
           centerTitle: false,
           title: Text('COIVD-19 TRACKER APP'),
@@ -85,89 +89,126 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:<Widget>[ 
-                  Text("INDIA",style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                  
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>StatePage()));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: primaryBlack,
-                          borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Text("State",style: TextStyle(fontSize: 16,color: Colors.white, fontWeight: FontWeight.bold),)
-                      
-                      ),
-                  ),
-
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>DistrictPage()));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: primaryBlack,
-                          borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Text("District",style: TextStyle(fontSize: 16,color: Colors.white, fontWeight: FontWeight.bold),)
-                      
-                      ),
-                  ),
-                  
-                  
-                    ],
-                  ),
+                  children: <Widget>[
+                    Text(
+                      "INDIA",
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StatePage()));
+                      },
+                      child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: primaryBlack,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Text(
+                            "State",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DistrictPage()));
+                      },
+                      child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: primaryBlack,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Text(
+                            "District",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )),
+                    ),
+                  ],
+                ),
               ),
-              IndiaData == null? CircularProgressIndicator(): IndiaPanel(
+              IndiaData == null
+                  ? Center(child: CircularProgressIndicator())
+                  : IndiaPanel(
                       IndiaData: IndiaData,
                     ),
-              
-               Padding( 
-                 padding: const EdgeInsets.symmetric(horizontal:10.0),
-                 child: Text("Most Affected States",style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-               ),
-
-              SizedBox(height:10),
-
-               StateData==null?Container():MostAffectedStates(StateData: StateData,),
-               InfoPanel(),
-               SizedBox(height: 20,),
-               Center(child: Text('STAY HOME, STAY SAFE',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
-               SizedBox(height: 20,),
-               Center(child: Text("REACH ME ON:",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,))),
-               SizedBox(height: 10,),
-               Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
-                 children: <Widget>[
-                   IconButton(
-                     icon: FaIcon(FontAwesomeIcons.instagram), 
-                     onPressed: (){
-                       launch("https://www.instagram.com/_lakshay.apk_/");
-                     }
-                     ),
-                   IconButton(
-                     icon: FaIcon(FontAwesomeIcons.github), 
-                     onPressed: (){
-                       launch("https://github.com/lakshaymadhav");
-                     }
-                     ),
-                   IconButton(
-                     icon: Icon(Icons.mail), 
-                     onPressed: (){
-                       launch("mailto: lakshaymadhav25@gmail.com");
-                     }
-                     ), 
-                 ],
-               ),
-               SizedBox(height: 30,),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, top: 20.0),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      "Most Affected States",
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text('(Confirmed)', style: TextStyle(color: Colors.red))
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              StateData == null
+                  ? Center(child: CircularProgressIndicator())
+                  : MostAffectedStates(
+                      StateData: StateData,
+                    ),
+              InfoPanel(),
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                  child: Text(
+                'STAY HOME, STAY SAFE',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              )),
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                  child: Text("REACH ME ON:",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ))),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  IconButton(
+                      icon: FaIcon(FontAwesomeIcons.instagram),
+                      onPressed: () {
+                        launch("https://www.instagram.com/_lakshay.apk_/");
+                      }),
+                  IconButton(
+                      icon: FaIcon(FontAwesomeIcons.github),
+                      onPressed: () {
+                        launch("https://github.com/lakshaymadhav");
+                      }),
+                  IconButton(
+                      icon: Icon(Icons.mail),
+                      onPressed: () {
+                        launch("mailto: lakshaymadhav25@gmail.com");
+                      }),
+                ],
+              ),
             ],
           ),
         ),

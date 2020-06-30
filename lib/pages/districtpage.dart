@@ -47,22 +47,36 @@ class _DistrictPageState extends State<DistrictPage> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : ListView.builder(
+          : GridView.builder(
               itemCount: null == _DistrictData ? 0 : _DistrictData.length,
               itemBuilder: (context, index) {
                 DistrictData data = _DistrictData[index];
-                return ListTile(
-                  title: Text(data.state),
-                  subtitle: Text(data.statecode),
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DistrictSubPage(
-                          districtData: data.districtData,
-                        ),
-                      )),
+                return Container(
+                  height: 4,
+                  child: Card(
+                    elevation: 2.0,
+                    child: ListTile(
+                      title: Text(data.state,
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text(data.statecode),
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DistrictSubPage(
+                              districtData: data.districtData,
+                            ),
+                          )),
+                    ),
+                  ),
                 );
               },
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: MediaQuery.of(context).size.width /
+                      (MediaQuery.of(context).size.height / 4),
+                  crossAxisCount: (MediaQuery.of(context).orientation ==
+                          Orientation.portrait)
+                      ? 2
+                      : 4),
             ),
     );
   }

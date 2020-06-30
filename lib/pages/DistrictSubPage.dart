@@ -74,21 +74,31 @@ class DistrictSubPage extends StatelessWidget {
                     children: <Widget>[
                       Center(
                         child: Text("TODAY",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).accentColor)),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                              Text('Confirmed:'),
-                              Text(_currentData.delta.confirmed.toString()),
+                              Text('Confirmed:',
+                                  style: TextStyle(
+                                      color: Theme.of(context).accentColor)),
+                              Text(_currentData.delta.confirmed.toString(),
+                                  style: TextStyle(
+                                      color: Theme.of(context).accentColor)),
                             ],
                           ),
                           Row(
                             children: <Widget>[
-                              Text('Recovered:'),
-                              Text(_currentData.delta.recovered.toString()),
+                              Text('Recovered:',
+                                  style: TextStyle(
+                                      color: Theme.of(context).accentColor)),
+                              Text(_currentData.delta.recovered.toString(),
+                                  style: TextStyle(
+                                      color: Theme.of(context).accentColor)),
                             ],
                           )
                         ],
@@ -97,8 +107,12 @@ class DistrictSubPage extends StatelessWidget {
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Deceased:'),
-                          Text(_currentData.delta.deceased.toString())
+                          Text('Deceased:',
+                              style: TextStyle(
+                                  color: Theme.of(context).accentColor)),
+                          Text(_currentData.delta.deceased.toString(),
+                              style: TextStyle(
+                                  color: Theme.of(context).accentColor))
                         ],
                       ))
                     ],

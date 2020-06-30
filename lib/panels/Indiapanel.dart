@@ -14,15 +14,13 @@ class IndiaPanel extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, childAspectRatio: 2),
         children: <Widget>[
-          
-           StatusPanel(
-             title: "CONFIRMED",
-             PanelColor: Colors.red[100],
-             TextColor: Colors.red,
-             counter: IndiaData['confirmed'].toString(),
-             newly: IndiaData['cChanges'].toString(),
-             ),
-          
+          StatusPanel(
+            title: "CONFIRMED",
+            PanelColor: Colors.red[100],
+            TextColor: Colors.red,
+            counter: IndiaData['confirmed'].toString(),
+            newly: IndiaData['cChanges'].toString(),
+          ),
           StatusPanel(
             title: "ACTIVE",
             PanelColor: Colors.blue[100],
@@ -58,7 +56,12 @@ class StatusPanel extends StatelessWidget {
   final String newly;
 
   const StatusPanel(
-      {Key key, this.PanelColor, this.TextColor, this.title, this.counter,this.newly})
+      {Key key,
+      this.PanelColor,
+      this.TextColor,
+      this.title,
+      this.counter,
+      this.newly})
       : super(key: key);
 
   @override
@@ -67,30 +70,29 @@ class StatusPanel extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
-     ),
-    margin: EdgeInsets.all(10),
-    color: PanelColor,
-    
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-    title,
-    style: TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 16, color: TextColor),
-        ),
-        Text(
-    counter,
-    style: TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 16, color: TextColor),
-        ),
-         Text(
-    "[+"+newly+"]",
-    style: TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 14, color: TextColor),
-        ),
-      ],
-    ),
-        );
+      ),
+      margin: EdgeInsets.all(10),
+      color: PanelColor,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            title,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 16, color: TextColor),
+          ),
+          Text(
+            counter,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 16, color: TextColor),
+          ),
+          Text(
+            "[+" + newly + "]",
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 14, color: TextColor),
+          ),
+        ],
+      ),
+    );
   }
 }
