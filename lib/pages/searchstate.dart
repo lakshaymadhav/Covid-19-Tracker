@@ -1,6 +1,7 @@
 import 'package:Covid19_Tracker/pages/DistrictData.dart';
 import 'services.dart';
 import 'package:flutter/material.dart';
+import 'DistrictSubPage.dart';
 
 class SearchState extends SearchDelegate {
   @override
@@ -61,9 +62,14 @@ class SearchState extends SearchDelegate {
       itemCount: SuggestionList.length,
       itemBuilder: (context, index) {
         DistrictData data = SuggestionList[index];
-        return ListTile(
-          title: Text(data.state),
-          subtitle: Text(data.statecode),
+        return GestureDetector(
+          onTap: (){
+             Navigator.push(context, MaterialPageRoute(builder: (context)=>DistrictSubPage(districtData: data.districtData,)));
+          },
+            child: ListTile(
+            title: Text(data.state),
+            subtitle: Text(data.statecode),
+          ),
         );
       },
     );
