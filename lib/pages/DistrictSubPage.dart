@@ -37,14 +37,14 @@ class DistrictSubPage extends StatelessWidget {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text('Confirmed:'),
-                            Text(_currentData.confirmed.toString()),
+                            Text('Confirmed:',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
+                            Text(_currentData.confirmed.toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
                           ],
                         ),
                         Row(
                           children: <Widget>[
-                            Text('Active:'),
-                            Text(_currentData.active.toString()),
+                            Text('Active:',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
+                            Text(_currentData.active.toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
                           ],
                         )
                       ],
@@ -53,14 +53,14 @@ class DistrictSubPage extends StatelessWidget {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text('Deceased:'),
-                            Text(_currentData.deceased.toString()),
+                            Text('Deceased:',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
+                            Text(_currentData.deceased.toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
                           ],
                         ),
                         Row(
                           children: <Widget>[
-                            Text('Recovered:'),
-                            Text(_currentData.recovered.toString()),
+                            Text('Recovered:',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
+                            Text(_currentData.recovered.toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
                           ],
                         )
                       ],
@@ -81,14 +81,14 @@ class DistrictSubPage extends StatelessWidget {
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                              Text('Confirmed:'),
-                              Text(_currentData.delta.confirmed.toString()),
+                              Text('Confirmed:',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
+                              Text(_currentData.delta.confirmed.toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
                             ],
                           ),
                           Row(
                             children: <Widget>[
-                              Text('Recovered:'),
-                              Text(_currentData.delta.recovered.toString()),
+                              Text('Recovered:',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
+                              Text(_currentData.delta.recovered.toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
                             ],
                           )
                         ],
@@ -97,8 +97,8 @@ class DistrictSubPage extends StatelessWidget {
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Deceased:'),
-                          Text(_currentData.delta.deceased.toString())
+                          Text('Deceased:',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey,)),
+                          Text(_currentData.delta.deceased.toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),)
                         ],
                       ))
                     ],

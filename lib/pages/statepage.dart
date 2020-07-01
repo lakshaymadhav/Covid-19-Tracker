@@ -16,6 +16,7 @@ class _StatePageState extends State<StatePage> {
   
   List StateData;
   fetchStateData() async {
+   
     http.Response response =
         await http.get('https://api.covidindiatracker.com/state_data.json');
     setState(() {
@@ -70,17 +71,17 @@ class _StatePageState extends State<StatePage> {
             Expanded(
               child: Container(
                 child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-         Text('CONFRIMED: '+StateData[index]['confirmed'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
-          Text('[+'+StateData[index]['cChanges'].toString()+"]",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
-          Text('ACTIVE: '+StateData[index]['active'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
-          Text('['+StateData[index]['aChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
-          Text('RECOVERED: '+StateData[index]['recovered'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
-          Text('[+'+StateData[index]['rChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
-          Text('DEATHS: '+StateData[index]['deaths'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
-          Text('[+'+StateData[index]['dChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
-        ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                  Text('CONFIRMED: '+StateData[index]['confirmed'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
+                    Text('[+'+StateData[index]['cChanges'].toString()+"]",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
+                    Text('ACTIVE: '+StateData[index]['active'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
+                    Text('['+StateData[index]['aChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
+                    Text('RECOVERED: '+StateData[index]['recovered'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
+                    Text('[+'+StateData[index]['rChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
+                    Text('DEATHS: '+StateData[index]['deaths'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
+                    Text('[+'+StateData[index]['dChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
+                  ],
                 ),
               ),
             ),

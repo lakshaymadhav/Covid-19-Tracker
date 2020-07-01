@@ -57,8 +57,8 @@ class _DistrictPageState extends State<DistrictPage> {
              onTap: (){
                Navigator.push(context, MaterialPageRoute(builder: (context)=>DistrictSubPage(districtData: data.districtData,)));
              },
-            title: Text(data.state),
-            subtitle: Text(data.statecode),
+            title: Text(data.state,style: TextStyle(fontWeight: FontWeight.bold),),
+            subtitle: Text(data.statecode,style: TextStyle(fontWeight: FontWeight.bold),),
           );
         },
         ),
