@@ -13,14 +13,15 @@ class StatePage extends StatefulWidget {
 
 class _StatePageState extends State<StatePage> {
 
-  
+  var tamilnadu;
   List StateData;
   fetchStateData() async {
-   
+     
     http.Response response =
         await http.get('https://api.covidindiatracker.com/state_data.json');
     setState(() {
       StateData = json.decode(response.body);
+      tamilnadu=StateData.where((element) => element['state']=='Tamil Nadu');
     });
   }
 
@@ -46,9 +47,9 @@ class _StatePageState extends State<StatePage> {
  
         title: Text("State Stats"),
       ),
-      body: StateData == null? Center(child: CircularProgressIndicator()): 
+      body: tamilnadu == null? Center(child: CircularProgressIndicator()): 
       ListView.builder(
-      itemCount: StateData==null?0:StateData.length,
+      itemCount: tamilnadu==null?0:tamilnadu.length,
       itemBuilder: (context, index) {
         return Container(
             height: 140,
@@ -64,7 +65,7 @@ class _StatePageState extends State<StatePage> {
                 children: <Widget>[
         Icon(FontAwesomeIcons.city,size: 50,),
         SizedBox(height: 7,),
-        Text(StateData[index]['state'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 19),),
+        Text(tamilnadu[index]['state'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 19),),
                 ],
               ),
             ),
@@ -73,14 +74,14 @@ class _StatePageState extends State<StatePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                  Text('CONFIRMED: '+StateData[index]['confirmed'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
-                    Text('[+'+StateData[index]['cChanges'].toString()+"]",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
-                    Text('ACTIVE: '+StateData[index]['active'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
-                    Text('['+StateData[index]['aChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
-                    Text('RECOVERED: '+StateData[index]['recovered'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
-                    Text('[+'+StateData[index]['rChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
-                    Text('DEATHS: '+StateData[index]['deaths'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
-                    Text('[+'+StateData[index]['dChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
+                  Text('CONFIRMED: '+tamilnadu[index]['confirmed'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
+                    Text('[+'+tamilnadu[index]['cChanges'].toString()+"]",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
+                    Text('ACTIVE: '+tamilnadu[index]['active'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
+                    Text('['+tamilnadu[index]['aChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
+                    Text('RECOVERED: '+tamilnadu[index]['recovered'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
+                    Text('[+'+tamilnadu[index]['rChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
+                    Text('DEATHS: '+tamilnadu[index]['deaths'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
+                    Text('[+'+tamilnadu[index]['dChanges'].toString()+']',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
                   ],
                 ),
               ),
