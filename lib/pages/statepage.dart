@@ -47,9 +47,9 @@ class _StatePageState extends State<StatePage> {
  
         title: Text("State Stats"),
       ),
-      body: tamilnadu == null? Center(child: CircularProgressIndicator()): 
+      body: StateData == null? Center(child: CircularProgressIndicator()): 
       ListView.builder(
-      itemCount: tamilnadu==null?0:tamilnadu.length,
+      itemCount: StateData==null?0:StateData.length,
       itemBuilder: (context, index) {
         return Container(
             height: 140,
