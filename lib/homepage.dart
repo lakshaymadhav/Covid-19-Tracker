@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'package:Covid19_Tracker/pages/countryPage.dart';
 import 'package:Covid19_Tracker/pages/districtpage.dart';
 import 'package:Covid19_Tracker/pages/statepage.dart';
 import 'package:Covid19_Tracker/panels/Indiapanel.dart';
 import 'package:Covid19_Tracker/panels/infopanel.dart';
 import 'package:Covid19_Tracker/panels/mostaffectedstates.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:Covid19_Tracker/dynamic_theme.dart';
+import 'package:Covid19_Tracker/panels/mostaffectedcountries.dart';
+import 'package:Covid19_Tracker/panels/worldwidepanel.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,30 +20,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Map IndiaData;
-
-  fetchIndiaData() async {
-    http.Response response =
-        await http.get('https://api.covidindiatracker.com/total.json');
+  Map worldData;
+  fetchWorldWideData() async {
+    http.Response response = await http.get('https://corona.lmao.ninja/v2/all');
     setState(() {
-      IndiaData = json.decode(response.body);
+      worldData = json.decode(response.body);
     });
   }
 
-  List StateData;
-  fetchStateData() async {
+  List countryData;
+  fetchCountryData() async {
     http.Response response =
-        await http.get('https://api.covidindiatracker.com/state_data.json');
+        await http.get('https://corona.lmao.ninja/v2/countries?sort=cases');
     setState(() {
-      StateData = json.decode(response.body);
+      countryData = json.decode(response.body);
     });
   }
 
   @override
   void initState() {
     // TODO: implement initState
-    fetchIndiaData();
-    fetchStateData();
+    fetchWorldWideData();
+    fetchCountryData();
     super.initState();
   }
 
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
               }),
         ],
         centerTitle: false,
-        title: Text('COIVD-19 TRACKER APP'),
+        title: Text('COVID-19 TRACKER APP'),
       ),
       body: RefreshIndicator(
         onRefresh: refreshList,
@@ -95,31 +96,33 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      "INDIA",
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => StatePage()));
+                                builder: (context) => CountryPage()));
                       },
                       child: Container(
-                          padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: primaryBlack,
                             borderRadius: BorderRadius.circular(15),
                           ),
+                          padding: EdgeInsets.all(10),
                           child: Text(
-                            "State",
+                            'Regional',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           )),
+                    ),
+                    Text(
+                      'Worldwide',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -129,13 +132,13 @@ class _HomePageState extends State<HomePage> {
                                 builder: (context) => DistrictPage()));
                       },
                       child: Container(
-                          padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: primaryBlack,
                             borderRadius: BorderRadius.circular(15),
                           ),
+                          padding: EdgeInsets.all(10),
                           child: Text(
-                            "District",
+                            'India',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -145,23 +148,26 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              IndiaData == null
+              worldData == null
                   ? CircularProgressIndicator()
-                  : IndiaPanel(
-                      IndiaData: IndiaData,
+                  : WorldwidePanel(
+                      worldData: worldData,
                     ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 child: Text(
-                  "Most Affected States",
+                  'Most affected Countries',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 10),
-              StateData == null
+              SizedBox(
+                height: 10,
+              ),
+              countryData == null
                   ? Container()
-                  : MostAffectedStates(
-                      StateData: StateData,
+                  : MostAffectedPanel(
+                      countryData: countryData,
                     ),
               InfoPanel(),
               SizedBox(

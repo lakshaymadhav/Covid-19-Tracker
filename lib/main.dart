@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:Covid19_Tracker/datasoruce.dart';
 import 'package:Covid19_Tracker/homepage.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:Covid19_Tracker/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
